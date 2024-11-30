@@ -15,10 +15,8 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
-        # Use the screen's fill method to fill the screen with a solid "black" color
-        screen.fill((0, 0, 0))
 
-        # Use pygame's display.flip() method to refresh the screen. Be sure to call this last!
+        screen.fill("Black")
         pygame.display.flip()
 
 
