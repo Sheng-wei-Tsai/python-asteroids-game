@@ -1,4 +1,5 @@
 import pygame
+import circleshape.py import CircleShape
 from constants import *
 
 
@@ -11,7 +12,8 @@ def main():
 
     clock = pygame.time.Clock()
     dt = 0
-
+    test_ciricle = CircleShape(100, 100, 20)
+    
     # Main game loop
     while True:
         for event in pygame.event.get():
