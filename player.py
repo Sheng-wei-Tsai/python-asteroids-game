@@ -3,9 +3,13 @@ from constants import *
 from circleshape import CircleShape
 
 class Player(CircleShape):
+    containers = ()
     def __init__(self, x, y):
         super().__init__(x, y, PLAYER_RADIUS)
         self.rotation = 0
+        
+        for group in self.containers:
+            group.add(self)
         
 
     def draw(self, screen):
@@ -34,6 +38,8 @@ class Player(CircleShape):
             self.move(dt)
         if keys[pygame.K_s]:
             self.move(-dt)
+            
+            
     def move(self, dt):
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
         self.position += forward * PLAYER_SPEED * dt

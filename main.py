@@ -1,5 +1,4 @@
 import pygame
-from circleshape import CircleShape
 from constants import *
 from player import Player
 
@@ -11,21 +10,35 @@ def main():
     # Create a display window
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     pygame.display.set_caption("Asteroids Game")
+    
     clock = pygame.time.Clock()
-    player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2) 
     dt = 0
+    
+    #create groups
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+    
+    # Player class to groups
+    
+    Player.containers = (updatable, drawable)
+    
+    # Initialize the player and add it to groups
+    player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2) 
     
     # Main game loop
     while True:
         for event in pygame.event.get():
-
             if event.type == pygame.QUIT:
                 return
-        #
-        player.update(dt)
+        # update all objects in the updatable group
+        for obj in updatable:
+            obj.update(dt)
         
+        # Draw all objects in the drawable group        
         screen.fill("Black")
-        player.draw(screen)
+        for obj in drawable:
+            obj.draw(screen)
+
         pygame.display.flip()
 
         # cap the frame
