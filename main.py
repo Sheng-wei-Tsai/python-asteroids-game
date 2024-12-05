@@ -21,13 +21,13 @@ def main():
     
     # Player class to groups
     
-    Player.containers = (updatable, drawable)
     Asteroid.containers = (asteroids, updatable, drawable)
     AsteroidField.containers = (updatable)
+    Player.containers = (updatable, drawable)
     
     # Initialize the player and add it to groups
-    player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2) 
     asteroid_field = AsteroidField()
+    player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2) 
     # Main game loop
     while True:
         for event in pygame.event.get():
@@ -36,6 +36,12 @@ def main():
         # update all objects in the updatable group
         for obj in updatable:
             obj.update(dt)
+            
+        # Collision detection
+        for asteroid in asteroids:
+            if player.check_collision(asteroid):
+                print("Game Over")
+                return pygame.quit()
         
         # Draw all objects in the drawable group        
         screen.fill("Black")
